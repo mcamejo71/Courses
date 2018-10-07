@@ -6,4 +6,8 @@
     <StartupObject>Anonymous.Program</StartupObject>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Linq\" />
+  </ItemGroup>
+
 </Project>
