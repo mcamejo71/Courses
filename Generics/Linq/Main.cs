@@ -11,7 +11,7 @@ namespace Test1.Linq
 
         static void Main(string[] args)
         {
-            //SelectMany();
+            SelectMany();
             //GruopBy();
             //GruopingWithVariables();
             GruopingAndNestedObjects();
