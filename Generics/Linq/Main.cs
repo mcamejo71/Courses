@@ -11,8 +11,9 @@ namespace Test1.Linq
 
         static void Main(string[] args)
         {
-            InnerJoinWithMethods();
-            //InnerJoin();
+            LeftOuterJoin();
+            //InnerJoinWithMethods();
+            InnerJoin();
             //SelectMany();
             //GruopBy();
             //GruopingWithVariables();
@@ -20,6 +21,85 @@ namespace Test1.Linq
             //Totals();
 
             Console.ReadKey();
+        }
+
+
+        //static void LeftOuterJoinWithMethod()
+        //{
+        //    var racers = Formula1.GetChampions()
+        //                .SelectMany(r => r.Years, (r1, year) =>
+        //                new
+        //                {
+        //                    Year = year,
+        //                    Name = $"{r1.FirstName}{r1.LastName}"
+        //                });
+
+
+        //    var teams = Formula1.GetConstructorChampions()
+        //                .SelectMany(t => t.Years, (t1, year) =>
+        //                new
+        //                {
+        //                    Year = year,
+        //                    Name = $"{t1.Name}"
+        //                });
+
+        //    var racersAndteams = racers.GroupJoin(
+        //            teams,
+        //            r => r.Year,
+        //            t => t.Year,
+        //            (r, ts) => new
+        //            {
+        //                r.Year,
+        //                Champion = r.Name,
+        //                Construtors = ts
+        //            })
+        //            .SelectMany(
+        //            rt => 
+                
+        //        );
+
+
+
+        //}
+
+        static void LeftOuterJoin()
+        {
+            var racers = from r in Formula1.GetChampions()
+                         from y in r.Years
+                         select new
+                         {
+                             Year = y,
+                             Name = r.FirstName + " " + r.LastName
+                         };
+
+
+            var teams = from t in Formula1.GetConstructorChampions()
+                        from y in t.Years
+                        select new
+                        {
+                            Year = y,
+                            Name = t.Name
+                        };
+
+
+            var racersAndTeams = from r in racers
+                                 join t in teams on r.Year equals t.Year into rt
+                                 from t in rt.DefaultIfEmpty()
+                                 orderby r.Year
+                                 select new
+                                 {
+                                     r.Year,
+                                     Champion = r.Name,
+                                     Construtor = t == null ? "no constructor championship" : t.Name
+                                 };
+
+
+            foreach (var i in racersAndTeams)
+            {
+                Console.WriteLine($"{ i.Year,-5}{ i.Champion,-15}{i.Construtor}");
+            }
+            Console.WriteLine();
+
         }
 
 
@@ -127,15 +207,15 @@ namespace Test1.Linq
 
 
             //---- In just one query-----
-            var RacersAndTeams1 = ( from r in
+            var RacersAndTeams1 = from r in
 
-                                    from r1 in Formula1.GetChampions()
-                                    from yr in r1.Years
-                                    select new
-                                    {
-                                        Year = yr,
-                                        Name = r1.FirstName + " " + r1.LastName
-                                    }
+                                       from r1 in Formula1.GetChampions()
+                                       from yr in r1.Years
+                                       select new
+                                       {
+                                           Year = yr,
+                                           Name = r1.FirstName + " " + r1.LastName
+                                       }
 
                                    join t in
 
@@ -154,7 +234,7 @@ namespace Test1.Linq
                                        Year = r.Year,
                                        Racer = r.Name,
                                        Team = t.Name
-                                   }).Take(10);
+                                   };
 
 
 
