@@ -11,9 +11,10 @@ namespace Test1.Linq
 
         static void Main(string[] args)
         {
-            LeftOuterJoin();
+            test();
+            //LeftOuterJoin();
             //InnerJoinWithMethods();
-            InnerJoin();
+            //InnerJoin();
             //SelectMany();
             //GruopBy();
             //GruopingWithVariables();
@@ -22,6 +23,26 @@ namespace Test1.Linq
 
             Console.ReadKey();
         }
+
+
+        static void test()
+        {
+            var Countries1 = Formula1.GetChampions()
+              .GroupBy(r => r.Country)
+              .Select(g => new { Group = g, Count = g.Count() });
+              
+
+            foreach (var i in Countries1)
+            {
+                Console.WriteLine($"{i.Group.Key,-10}  {i.Count}");
+                foreach (var j in i.Group.Select(x => x).ToList())
+                {
+                    Console.WriteLine($"{j.LastName,-10} {j.FirstName}");
+                }
+            }
+        }
+
+
 
 
         //static void LeftOuterJoinWithMethod()
@@ -355,21 +376,21 @@ namespace Test1.Linq
             }
 
 
-            //var Countries = Formula1.GetChampions()
-            //    .GroupBy(r => r.Country)
-            //    .OrderByDescending(q => q.Count())
-            //    .ThenBy(q => q.Key)
-            //    .Where(r => r.Count() > 2)
-            //    .Select(q => new
-            //    {
-            //        Country = q.Key,
-            //        Count = q.Count()
-            //    });
+            var Countries = Formula1.GetChampions()
+                .GroupBy(r => r.Country)
+                .OrderByDescending(q => q.Count())
+                .ThenBy(q => q.Key)
+                .Where(r => r.Count() > 2)
+                .Select(q => new
+                {
+                    Country = q.Key,
+                    Count = q.Count()
+                });
 
-            //foreach (var i in Countries)
-            //{
-            //    Console.WriteLine($"{ i.Country,-50} {i.Count}");
-            //}
+            foreach (var i in Countries)
+            {
+                Console.WriteLine($"{ i.Country,-50} {i.Count}");
+            }
         }
 
         static void GruopingWithVariables()

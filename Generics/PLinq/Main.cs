@@ -18,14 +18,19 @@ namespace Test1.PLinq
 
         static void Main(string[] args)
         {
+
+            var dateTime1 = DateTime.Now;
+
             var x = SampleData();
 
 
-            //var res = (from y in x
-            //           where Math.Log(y) < 4
-            //           select x).Sum();
+            var res = (from y in x.AsParallel()
+                       where Math.Log(y) < 4
+                       select y).ToList();
 
-            Console.WriteLine("Press any key");
+            var diffInSeconds = (dateTime1 - DateTime.Now).TotalSeconds;
+
+            Console.WriteLine($"{diffInSeconds}. Press any key");
             Console.ReadKey();
         }
 
