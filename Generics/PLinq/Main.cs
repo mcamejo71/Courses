@@ -18,11 +18,9 @@ namespace Test1.PLinq
 
         static void Main(string[] args)
         {
-
             var dateTime1 = DateTime.Now;
 
             var x = SampleData();
-
 
             var res = (from y in x.AsParallel()
                        where Math.Log(y) < 4
