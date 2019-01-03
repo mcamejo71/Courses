@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿
+// https://github.com/ProfessionalCSharp/ProfessionalCSharp7/blob/master/EFCore/EFCoreSamples/
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -35,22 +38,7 @@ namespace Test1.EF_Core
         }
 
 
-        //static void Main(string[] args)
-        //{
-        //    //CreateTheDatabaseAsync().Wait();
-        //    //DeleteDatabaseAsync().Wait();
-        //    //AddBookAsync().Wait();
-        //    //AddBooksAsync().Wait();
-        //    ReadBooksAsync().Wait();
-        //    QueryBooksAsync().Wait();
-        //    //UpdateBookAsync().Wait();
-        //   //DeleteBooksAsync().Wait();
-
-        //    Console.ReadKey();
-        //}
-
-        // Create DB passing string connection
-        // The method OnConfiguring of DbContext should be overridden (see the implementation)
+       
 
         private async Task CreateTheDatabaseAsync()
         {
