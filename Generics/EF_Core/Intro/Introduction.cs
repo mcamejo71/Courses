@@ -26,8 +26,8 @@ namespace Test1.EF_Core
             var p = new Main1();
             p.AddLogging();
             //await p.CreateTheDatabaseAsync();
-            await p.AddBookAsync("Professional C# 7", "Wrox Press");
-            await p.AddBooksAsync();
+            //await p.AddBookAsync("Professional C# 7", "Wrox Press");
+            //await p.AddBooksAsync();
             //await p.ReadBooksAsync();
             await p.QueryBooksAsync();
             //await p.UpdateBookAsync();
@@ -37,8 +37,15 @@ namespace Test1.EF_Core
 
         }
 
+        //static void Main(string[] args)
+        //{
 
-       
+        //}
+
+
+
+
+
 
         private async Task CreateTheDatabaseAsync()
         {
