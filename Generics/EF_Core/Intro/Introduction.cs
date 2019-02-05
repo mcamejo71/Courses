@@ -23,6 +23,7 @@ namespace Test1.EF_Core
 
         static async Task Main()
         {
+            var x = "doing a test";
             var p = new Main1();
             p.AddLogging();
             //await p.CreateTheDatabaseAsync();
